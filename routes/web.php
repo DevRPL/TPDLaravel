@@ -20,3 +20,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => 'master', 'namespace' => 'Master', 'middleware' => ['auth'], 'as' => 'master.'], function () {
+    Route::resource('college-students', 'CollegeStudentController');
+    Route::resource('college-student-values', 'CollegeStudentValueController')->only(['index', 'create', 'store']);
+});
